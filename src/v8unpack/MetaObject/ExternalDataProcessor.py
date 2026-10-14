@@ -40,7 +40,7 @@ class ExternalDataProcessor(MetaObject):
         tasks = self.decode_includes(src_dir, dest_dir, '', self.header['header'])
 
         self.header['obj_version'] = self.obj_version
-        helper.json_write(self.header, dest_dir, f'{_file_name}.json')
+        helper.xml_write(self.header, dest_dir, f'{_file_name}.xml')
         # helper.json_write(self.data, dest_dir, f'{_file_name}.data{self.obj_version}.json')
         self.write_decode_code(dest_dir, 'ExternalDataProcessor')
 
@@ -63,7 +63,7 @@ class ExternalDataProcessor(MetaObject):
     def encode(self, src_dir, dest_dir, *, file_name=None, include_index=None, file_list=None, **kwargs):
         try:
             _file_name = self.get_class_name_without_version()
-            self.header = helper.json_read(src_dir, f'{_file_name}.json')
+            self.header = helper.xml_read(src_dir, f'{_file_name}.xml')
             helper.check_version(__version__, self.header.get('v8unpack', ''))
 
             # try:

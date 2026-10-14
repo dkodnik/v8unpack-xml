@@ -308,12 +308,11 @@ XYYZZ, например 8.3.6 = 80306
 ```json
 
   {
-    "ExternalDataProcessor.1c": "core/ExternalDataProcessor.1c",
-    "ExternalDataProcessor.data83.json": "core/ExternalDataProcessor.data83.json",
-    "ExternalDataProcessor.json": "core/ExternalDataProcessor.json",
+    "ExternalDataProcessor.obj.bsl": "core/ExternalDataProcessor.obj.bsl",
+    "ExternalDataProcessor.xml": "core/ExternalDataProcessor.xml",
     "Form": {
-      "API.1c": "core/Form/API.1c",
-      "API.form83.json": "core/Form/API.form83.json"
+      "API.obj.bsl": "core/Form/API.obj.bsl",
+      "API.xml": "core/Form/API.xml"
     }
   }
  ```
@@ -333,7 +332,7 @@ XYYZZ, например 8.3.6 = 80306
 {
   "Form": {
     "Форма1": {
-      "Form.id.json": null,   останется на месте
+      "Form.xml": null,   останется на месте
       "Form.obj.bsl": "base/Форма2.bsl",  будет перемещен по указанному пути 
       "*": "base/Форма1" - будут перемещены все файлы кроме 2 -  тех что описаны до *
     }

@@ -15,7 +15,7 @@ class OrganizerFormElem:
     def unpack(cls, params):
         src_dir, path, file_name, dest_dir, index, descent = params
         areas = {}
-        elements = helper.json_read(os.path.join(src_dir, path), file_name)
+        elements = helper.xml_read(os.path.join(src_dir, path), file_name)
         cls._unpack_get_areas(elements['tree'], '', elements['data'], areas)
         areas['root'] = elements
         cls._unpack_write_areas(src_dir, path, file_name, dest_dir, index, descent, areas)
@@ -116,10 +116,10 @@ class OrganizerFormElem:
                 else:
                     dest_entry_path, dest_file_name = OrganizerCode.parse_include_path(
                         elem, path, elem, index.get('Области include') if index else None, descent,
-                        file_extension=file_name[-9::])
+                        file_extension='elem.xml')
                 dest_path = os.path.abspath(os.path.join(dest_dir, dest_entry_path))
 
-                helper.json_write(areas[elem], dest_path, dest_file_name)
+                helper.xml_write(areas[elem], dest_path, dest_file_name)
         except Exception as err:
             raise ExtException(
                 parent=err,
@@ -131,7 +131,7 @@ class OrganizerFormElem:
     def pack(cls, params):
         src_dir, src_path, src_file_name, dest_dir, dest_path, dest_file_name, index_code_areas, \
             descent, pack_get_descent_filename = params
-        elements = helper.json_read(os.path.join(src_dir, src_path), src_file_name)
+        elements = helper.xml_read(os.path.join(src_dir, src_path), src_file_name)
         try:
             cls._pack_get_areas(src_dir, src_path, src_file_name, elements['tree'], '', elements['data'],
                                 index_code_areas, descent)
@@ -139,7 +139,7 @@ class OrganizerFormElem:
             raise ExtException(parent=err, message='Ошибка сборки элементов формы',
                                detail=f'{os.path.join(src_path, src_file_name)}')
 
-        helper.json_write(elements, os.path.join(dest_dir, dest_path), dest_file_name)
+        helper.xml_write(elements, os.path.join(dest_dir, dest_path), dest_file_name)
 
     @staticmethod
     def form_elem_class(version, elem_type):
@@ -156,10 +156,10 @@ class OrganizerFormElem:
                 if area_type:
                     area_name = name[8:]
                     _path, _file_name = OrganizerCode.parse_include_path(
-                        area_name, src_path, file_name, index_code_areas, descent, file_extension=file_name[-9::])
+                        area_name, src_path, file_name, index_code_areas, descent, file_extension='elem.xml')
                     _src_abs_path = os.path.abspath(os.path.join(src_dir, _path))
 
-                    include_elements = helper.json_read(_src_abs_path, _file_name)
+                    include_elements = helper.xml_read(_src_abs_path, _file_name)
                     cls._append_area_data(include_elements['tree'], name, root_data, include_elements['data'],
                                           cls.get_old_path(elem, path), area_type)
                     elem['child'] = include_elements['tree']

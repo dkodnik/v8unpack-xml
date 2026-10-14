@@ -112,7 +112,7 @@ class Decoder:
         print(f'{"Собираем объект":30}')
         helper.clear_dir(dest_dir)
         _type = cls.get_encoder(src_dir, options)
-        header = helper.json_read(src_dir, f'{_type}.json')
+        header = helper.xml_read(src_dir, f'{_type}.xml')
         encoder = cls.get_handler_by_version_file(options=options, **header)
         encoder.header = header
         encoder.container_uuid = encoder.get_container_uuid(header['header'])
@@ -154,7 +154,7 @@ class Decoder:
     def get_encoder(cls, src_dir, options=None):
         _type = None
         for _type in available_types:
-            if os.path.isfile(os.path.join(src_dir, f'{_type}.json')):
+            if os.path.isfile(os.path.join(src_dir, f'{_type}.xml')):
                 return _type
         raise FileNotFoundError(f'Не найдены файлы для сборки версии ({src_dir})')
 

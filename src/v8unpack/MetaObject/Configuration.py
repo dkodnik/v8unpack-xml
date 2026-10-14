@@ -69,7 +69,7 @@ class Configuration(MetaObject):
 
         tasks = self.decode_includes(src_dir, dest_dir, '', self.header['header'])
         self.header['obj_version'] = self.obj_version
-        helper.json_write(self.header, dest_dir, f'{file_name}.json')
+        helper.xml_write(self.header, dest_dir, f'{file_name}.xml')
         self.write_decode_code(dest_dir, file_name)
         return tasks
 

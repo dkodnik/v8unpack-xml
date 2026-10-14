@@ -1,6 +1,7 @@
 import os
 
 from .. import helper
+from .. import xml_codec
 from ..MetaObject import MetaObject
 from ..ext_exception import ExtException
 
@@ -86,8 +87,9 @@ class MetaDataObject(MetaObject):
 
             id_data = self.decode_ids()
             self.header['obj_version'] = self.obj_version
-            helper.json_write(id_data, dest_full_path, f'{file_name}.id.json')
-            helper.json_write(self.header, dest_full_path, f'{file_name}.json')
+            attributes = {k: v for k, v in id_data.items() if k != 'uuid'}
+            helper.xml_write(self.header, dest_full_path, f'{file_name}.xml',
+                             uuid=id_data.get('uuid'), attributes=attributes or None)
             self.write_decode_code(dest_full_path, file_name)
         except Exception as err:
             raise ExtException(parent=err)
@@ -108,7 +110,7 @@ class MetaDataObject(MetaObject):
 
     @classmethod
     def read_header(cls, src_dir, src_file_name, data_id):
-        header = helper.json_read(src_dir, f'{src_file_name}.json')
+        header = helper.xml_read(src_dir, f'{src_file_name}.xml')
         # header['name'] = data_id['name']
         header['uuid'] = data_id['uuid']
         return header
@@ -121,8 +123,11 @@ class MetaDataObject(MetaObject):
             # header_data = header['header']
             # self = cls.get_handler(header_data, options)
             try:
-                data_id = helper.json_read(src_dir, f'{src_file_name}.id.json')
-                header = helper.json_read(src_dir, f'{src_file_name}.json')
+                header = helper.xml_read(src_dir, f'{src_file_name}.xml')
+                id_attributes = xml_codec.read_attributes(src_dir, f'{src_file_name}.xml')
+                if header is None:
+                    return None, None
+                data_id = dict(id_attributes)
             except FileNotFoundError:
                 return None, None
             self = cls.get_handler(header['header'], options)

@@ -53,14 +53,14 @@ class ConfigurationExtension(Configuration):
 
         helper.txt_write(helper.str_decode(product_version), dest_dir, 'version.bin', encoding='utf-8')
         self.header['obj_version'] = self.obj_version
-        helper.json_write(self.header, dest_dir, f'{self.get_class_name_without_version()}.json')
+        helper.xml_write(self.header, dest_dir, f'{self.get_class_name_without_version()}.xml')
         self.write_decode_code(dest_dir, self.__class__.__name__)
 
         return tasks
 
     def encode(self, src_dir, dest_dir, *, file_name=None, include_index=None, file_list=None):
         try:
-            self.header = helper.json_read(src_dir, f'{self.get_class_name_without_version()}.json')
+            self.header = helper.xml_read(src_dir, f'{self.get_class_name_without_version()}.xml')
 
             self.set_product_info(src_dir, file_name)
 

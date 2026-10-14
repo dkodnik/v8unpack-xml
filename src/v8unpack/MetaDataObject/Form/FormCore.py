@@ -213,13 +213,11 @@ class FormCore(SimpleNameFolder):
             # 'name': self.header.pop('name'),
         }
         self.header['obj_version'] = self.obj_version
-        helper.json_write(id_data, dest_full_path, f'{file_name}.id.json')
-        helper.json_write(self.header, dest_full_path, f'{file_name}.json')
+        helper.xml_write(self.header, dest_full_path, f'{file_name}.xml', uuid=id_data.get('uuid'))
         self.write_decode_code(dest_full_path, file_name)
 
-        # helper.json_write(self.form, self.new_dest_dir, f"{typed_file_name}.form.json")
         # if self.elements_tree or self.props or self.params or self.commands:
-        helper.json_write(
+        helper.xml_write(
             dict(
                 params=self.params,
                 props=self.props,
@@ -227,7 +225,7 @@ class FormCore(SimpleNameFolder):
                 tree=self.elements_tree,
                 data=self.elements_data,
             ),
-            self.new_dest_dir, f"{file_name}.elem.json")
+            self.new_dest_dir, f"{file_name}.elem.xml")
         return []
 
     def decode_data(self, src_dir, uuid):

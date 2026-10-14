@@ -39,7 +39,7 @@ class OrganizerFile:
                     continue
                 if entry.endswith('.bsl'):
                     tasks_code_file.append((src_dir, path, entry, dest_dir, index, descent))
-                elif entry.endswith('.elem.json'):
+                elif entry.endswith('.elem.xml'):
                     tasks_form_elem.append((src_dir, path, entry, dest_dir, index, descent))
                 else:
                     src_path = os.path.join(src_dir, path)
@@ -172,7 +172,7 @@ class OrganizerFile:
                     src_dir, _src_path, os.path.basename(index_entry),
                     dest_dir, _dest_path, entry, index_code_areas,
                     descent, func_descent_filename))
-            elif entry.endswith('.elem.json'):
+            elif entry.endswith('.elem.xml'):
                 tasks_form_elem.append((
                     src_dir, _src_path, os.path.basename(index_entry),
                     dest_dir, _dest_path, entry, index_code_areas, descent,
@@ -273,7 +273,7 @@ class OrganizerFile:
                     tasks_code_file.append((
                         src_dir, path, descent_file_name, dest_dir, path, entry, index_code_areas, descent,
                         cls.pack_get_descent_filename))
-                elif entry.endswith('.elem.json'):
+                elif entry.endswith('.elem.xml'):
                     tasks_form_elem.append((
                         src_dir, path, descent_file_name, dest_dir, path, entry, index_code_areas, descent,
                         cls.pack_get_descent_filename))

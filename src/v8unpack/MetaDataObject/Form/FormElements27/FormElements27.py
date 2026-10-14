@@ -101,7 +101,7 @@ class FormElements27:
             # index_element_count = 0
             # if raw_data[index_element_count] == 'Дочерние элементы отдельно':
             # elements = helper.json_read(src_dir, f'{file_name}.elements802.json')
-            elements = helper.json_read(src_dir, f'{file_name}.elem.json')
+            elements = helper.xml_read(src_dir, f'{file_name}.elem.xml')
             self.form.props = elements['props']
             self.form.elements_data = elements['data']
             self.form.elements_tree = elements['tree']

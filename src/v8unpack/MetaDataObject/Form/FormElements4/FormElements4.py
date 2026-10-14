@@ -95,7 +95,7 @@ class FormElements4:
     def encode(self, src_dir, file_name, dest_dir, raw_data):
         try:
             # elements = helper.json_read(src_dir, f'{file_name}.elements{self.version}.json')
-            elements = helper.json_read(src_dir, f'{file_name}.elem.json')
+            elements = helper.xml_read(src_dir, f'{file_name}.elem.xml')
             try:
                 self.form.elements_tree = elements.get('tree')
                 self.form.elements_data = elements.get('data')

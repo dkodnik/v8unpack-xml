@@ -16,7 +16,7 @@ class MetaObject:
     _obj_info = None
     _obj_name = None
 
-    re_meta_data_obj = re.compile('^[^.]+\.json$')
+    re_meta_data_obj = re.compile('^[^.]+\.xml$')
     directive_1c_uncomment = re.compile('(?P<n>\\n)(?P<d>#Область|#КонецОбласти|&НаСервере|&НаКлиенте)')
     directive_1c_comment = re.compile('(?P<n>\\n)(?P<c>// v8unpack )(?P<d>[#|&])')
 
@@ -460,7 +460,7 @@ class MetaObject:
             for elem in self._obj_info:
                 try:
                     data = helper.brace_file_read(src_dir, f'{self.header["uuid"]}.{self._obj_info[elem]}')
-                    helper.json_write(data, dest_dir, f'{dest_file_name}.{self._obj_info[elem]}.json')
+                    helper.xml_write(data, dest_dir, f'{dest_file_name}.{self._obj_info[elem]}.xml')
 
                 except FileNotFoundError:
                     pass
@@ -480,7 +480,7 @@ class MetaObject:
         if self._obj_info:
             for elem in self._obj_info:
                 try:
-                    data = helper.json_read(src_dir, f'{file_name}.{self._obj_info[elem]}.json')
+                    data = helper.xml_read(src_dir, f'{file_name}.{self._obj_info[elem]}.xml')
                     dest_file_name = f'{self.header["uuid"]}.{self._obj_info[elem]}'
                     helper.brace_file_write(data, dest_dir, dest_file_name)
                     self.file_list.append(dest_file_name)

@@ -54,6 +54,18 @@ def json_read(path, file_name):
         raise ExtException(message='Ошибка чтения', detail=f'{err} в файле ({_path})')
 
 
+def xml_read(path, file_name):
+    """Читает XML-файл исходников (аналог json_read)."""
+    from . import xml_codec
+    return xml_codec.read_xml(path, file_name)
+
+
+def xml_write(data, path, file_name, uuid=None, attributes=None):
+    """Записывает XML-файл исходников (аналог json_write)."""
+    from . import xml_codec
+    return xml_codec.write_xml(data, path, file_name, uuid=uuid, attributes=attributes)
+
+
 def json_write(data, path, file_name):
     _path = os.path.normpath(os.path.join(path, file_name))
     makedirs(path, exist_ok=True)
