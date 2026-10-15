@@ -1,11 +1,11 @@
 [project]
-name = "v8unpack"
+name = "v8unpack-xml"
 dynamic = ["version"]
 dependencies = ["tqdm>=4"]
 authors = [
     { name = "Razgovorov Mikhail", email = "1338833@gmail.com" },
 ]
-description = "Unpacking binaries 1C to JSON for GIT"
+description = "Unpacking binaries 1C to XML for GIT"
 keywords = ["1c", "cf", "cfe", "epf", "v8unpack", "saby", "sbis", "сбис", "1с"]
 readme = "README.md"
 requires-python = ">=3.7"

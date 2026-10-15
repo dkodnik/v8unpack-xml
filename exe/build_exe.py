@@ -3,7 +3,7 @@ import PyInstaller.__main__
 PyInstaller.__main__.run([
     'source.py',
     '--onefile',
-    '-n', 'v8unpack',
+    '-n', 'v8unpack-xml',
     '--collect-all', 'v8unpack',
     '--hidden-import', 'tqdm',
     '--hidden-import', 'os',
